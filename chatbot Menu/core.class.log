@@ -2,25 +2,25 @@
   key: {
     remoteJid: '5492616855639@s.whatsapp.net',
     fromMe: false,
-    id: 'DC686627CB24001E153B6E6F53968411',
+    id: '3EB0113D5DBD43935DA703',
     participant: undefined
   },
-  messageTimestamp: 1719873532,
+  messageTimestamp: 1719949701,
   pushName: 'Gonzalo Palavesino',
   broadcast: false,
   message: Message {
-    conversation: 'H',
+    conversation: 'fds',
     messageContextInfo: MessageContextInfo {
       deviceListMetadata: [DeviceListMetadata],
       deviceListMetadataVersion: 2
     }
   },
-  body: 'H',
+  body: 'fds',
   from: '5492616855639'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_4bf429be-0b5c-4c78-9a5d-9efe2be5d890',
-  keyword: 'key_b9adafa9-920c-45c9-beeb-da10d13c9c6e',
+  ref: 'ans_4624748e-e22f-48a4-9026-274760c5f3fb',
+  keyword: 'key_f10bb3d7-960a-4f8b-922d-3e2e1e7fb595',
   answer: 'ᴡ ᴇ ʟ ᴄ ᴏ ᴍ ᴇ  𝓣𝓸  𝓒𝓱𝓪𝓽𝓑𝓸𝓽',
   options: {
     media: null,
@@ -34,11 +34,11 @@
     keyword: {},
     callback: false
   },
-  refSerialize: '504167d786cacf4772903999874b0479'
+  refSerialize: 'a44777c4a8851695381279dc815adc2a'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_3e15a53c-83d3-4133-9613-7645fbf16f34',
-  keyword: 'ans_4bf429be-0b5c-4c78-9a5d-9efe2be5d890',
+  ref: 'ans_5952e5b2-d033-483a-87ae-a29ba10a5d9f',
+  keyword: 'ans_4624748e-e22f-48a4-9026-274760c5f3fb',
   answer: ' Seleccion una Opcion\n1- Comida 🍜 \n2- Usuario 👤',
   options: {
     media: null,
@@ -52,150 +52,16 @@
     keyword: {},
     callback: true
   },
-  refSerialize: '6f1eaf2f0476094b91e9027f0cb09060'
+  refSerialize: 'f497ee4de205b1ebc46f63b344ef0e24'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '5492616855639@s.whatsapp.net',
     fromMe: false,
-    id: 'D55E351C456C1D7CC687735C5E7255ED',
+    id: '3EB012D037999D637CC1D7',
     participant: undefined
   },
-  messageTimestamp: 1719873539,
-  pushName: 'Gonzalo Palavesino',
-  broadcast: false,
-  message: Message {
-    conversation: '2',
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: '2',
-  from: '5492616855639'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_15338e7f-b2b5-489a-9149-7c7dfa7e5e65',
-  keyword: 'key_91a35168-2a3a-496b-83d5-80e47d38c30b',
-  answer: ' Ingrese Un id de Usuario 🗝️',
-  options: {
-    media: null,
-    buttons: [],
-    capture: true,
-    child: null,
-    delay: 2000,
-    idle: null,
-    ref: null,
-    nested: [],
-    keyword: {},
-    callback: true
-  },
-  refSerialize: 'f33be1b97f5c2a0308e6dd4bc9bdfd02'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '5492616855639@s.whatsapp.net',
-    fromMe: false,
-    id: 'F5A6AC59E36F036169C744E000A584B2',
-    participant: undefined
-  },
-  messageTimestamp: 1719873547,
-  pushName: 'Gonzalo Palavesino',
-  broadcast: false,
-  message: Message {
-    conversation: '4',
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: '4',
-  from: '5492616855639'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '5492616855639@s.whatsapp.net',
-    fromMe: false,
-    id: '2BC26B3E45ADDF6F8379AB7EB6F53457',
-    participant: undefined
-  },
-  messageTimestamp: 1719873560,
-  pushName: 'Gonzalo Palavesino',
-  broadcast: false,
-  message: Message {
-    conversation: 'D',
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: 'D',
-  from: '5492616855639'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_4bf429be-0b5c-4c78-9a5d-9efe2be5d890',
-  keyword: 'key_b9adafa9-920c-45c9-beeb-da10d13c9c6e',
-  answer: 'ᴡ ᴇ ʟ ᴄ ᴏ ᴍ ᴇ  𝓣𝓸  𝓒𝓱𝓪𝓽𝓑𝓸𝓽',
-  options: {
-    media: null,
-    buttons: [],
-    capture: false,
-    child: null,
-    delay: 0,
-    idle: null,
-    ref: null,
-    nested: [],
-    keyword: {},
-    callback: false
-  },
-  refSerialize: '504167d786cacf4772903999874b0479'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_3e15a53c-83d3-4133-9613-7645fbf16f34',
-  keyword: 'ans_4bf429be-0b5c-4c78-9a5d-9efe2be5d890',
-  answer: ' Seleccion una Opcion\n1- Comida 🍜 \n2- Usuario 👤',
-  options: {
-    media: null,
-    buttons: [],
-    capture: true,
-    child: null,
-    delay: 2000,
-    idle: null,
-    ref: null,
-    nested: [ [Object], [Object], [Object], [Object] ],
-    keyword: {},
-    callback: true
-  },
-  refSerialize: '6f1eaf2f0476094b91e9027f0cb09060'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '5492616855639@s.whatsapp.net',
-    fromMe: false,
-    id: 'CADEB8A361C319AEE703DC2E5F1E322A',
-    participant: undefined
-  },
-  messageTimestamp: 1719873569,
-  pushName: 'Gonzalo Palavesino',
-  broadcast: false,
-  message: Message {
-    conversation: 'F',
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: 'F',
-  from: '5492616855639'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '5492616855639@s.whatsapp.net',
-    fromMe: false,
-    id: 'A53115C5B2AE3D4E4CE283D1E72D8AED',
-    participant: undefined
-  },
-  messageTimestamp: 1719873580,
+  messageTimestamp: 1719949710,
   pushName: 'Gonzalo Palavesino',
   broadcast: false,
   message: Message {
@@ -209,8 +75,8 @@
   from: '5492616855639'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_f3545af3-39ff-4aa0-9ab6-3c5ef7af2220',
-  keyword: 'key_fb887b1a-c87b-457c-b501-012a31c51fad',
+  ref: 'ans_d4efe505-3490-472d-b453-fbcdc42b6e25',
+  keyword: 'key_05450403-d086-45a3-8f6b-65906bc56a57',
   answer: ' Seleccion una Opcion 😋\n' +
     '1- Panchos 🌭\n' +
     '2- Pizza 🍕\n' +
@@ -235,76 +101,16 @@
     keyword: {},
     callback: true
   },
-  refSerialize: '779a0bf0d45da41e0415ee3bd331424a'
+  refSerialize: '64ccf54aeaf7383a4c779e654f201de3'
 }
 [handleMsg]:  {
   key: {
     remoteJid: '5492616855639@s.whatsapp.net',
     fromMe: false,
-    id: '97CDE66F0D2839CB7401EA80EE0F50F6',
+    id: '3EB07A5964366E8F09671C',
     participant: undefined
   },
-  messageTimestamp: 1719873593,
-  pushName: 'Gonzalo Palavesino',
-  broadcast: false,
-  message: Message {
-    conversation: '3',
-    messageContextInfo: MessageContextInfo {
-      deviceListMetadata: [DeviceListMetadata],
-      deviceListMetadataVersion: 2
-    }
-  },
-  body: '3',
-  from: '5492616855639'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_0ae7e3a6-08b3-4398-ab3b-e159c2fd7ad3',
-  keyword: 'key_9b9dff4c-9b87-4b03-840d-d4a234653bc4',
-  answer: '¡Genial!, Elija el tipo de Gaseosas quiere llevar.',
-  options: {
-    media: null,
-    buttons: [],
-    capture: false,
-    child: null,
-    delay: 0,
-    idle: null,
-    ref: null,
-    nested: [],
-    keyword: {},
-    callback: false
-  },
-  refSerialize: '4261157af9e943d478058b651d6550d6'
-}
-[QUEUE_SE_ENVIO]:  {
-  ref: 'ans_25993d2e-7c51-4c41-b7e4-0a8e5f2ad85c',
-  keyword: 'ans_0ae7e3a6-08b3-4398-ab3b-e159c2fd7ad3',
-  answer: 'Seleccione una Opcion 🥤✩\n' +
-    '1 - Pepsi 🔵\n' +
-    '2 - Coca Cola 🔴\n' +
-    '3 - Fanta 🟠\n' +
-    '4 - Sprite 🟢',
-  options: {
-    media: null,
-    buttons: [],
-    capture: true,
-    child: null,
-    delay: 2000,
-    idle: null,
-    ref: null,
-    nested: [ [Object], [Object], [Object] ],
-    keyword: {},
-    callback: true
-  },
-  refSerialize: 'a9666c3460bb1ecfb2a9f1e174fe1ddf'
-}
-[handleMsg]:  {
-  key: {
-    remoteJid: '5492616855639@s.whatsapp.net',
-    fromMe: false,
-    id: '7F5E7B81774A97FCCE911F56BF9B5A14',
-    participant: undefined
-  },
-  messageTimestamp: 1719873600,
+  messageTimestamp: 1719949719,
   pushName: 'Gonzalo Palavesino',
   broadcast: false,
   message: Message {
@@ -318,8 +124,67 @@
   from: '5492616855639'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_a9e61fc6-d4e3-4692-a57c-6cc7937f1f65',
-  keyword: 'key_4a2433b8-8f31-40da-813f-395c39f8321e',
+  ref: 'ans_90710df5-9e93-4a49-9479-5d4da2ac6091',
+  keyword: 'key_dfb1119c-8890-4b38-a424-94407bf29553',
+  answer: 'Seleccion tipo de Pizzas quiere llevar.',
+  options: {
+    media: null,
+    buttons: [],
+    capture: false,
+    child: null,
+    delay: 0,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: false
+  },
+  refSerialize: 'bf8106ffbd3aab47d7af83b3aa5cff37'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_7962c809-a3a1-47eb-a2d0-e0f869f87660',
+  keyword: 'ans_90710df5-9e93-4a49-9479-5d4da2ac6091',
+  answer: 'Seleccione una Opcion\n' +
+    '1 - Paleta con Queso 🟢\n' +
+    '2 - Pepperoni 🟡\n' +
+    '3 - Pizza Lomo con Queso 🔴',
+  options: {
+    media: null,
+    buttons: [],
+    capture: true,
+    child: null,
+    delay: 2000,
+    idle: null,
+    ref: null,
+    nested: [ [Object], [Object], [Object] ],
+    keyword: {},
+    callback: true
+  },
+  refSerialize: '829203029cad7a8f873cf925b13d1d60'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '5492616855639@s.whatsapp.net',
+    fromMe: false,
+    id: '3EB00EDA4BA25376379EA1',
+    participant: undefined
+  },
+  messageTimestamp: 1719949724,
+  pushName: 'Gonzalo Palavesino',
+  broadcast: false,
+  message: Message {
+    conversation: '2',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: '2',
+  from: '5492616855639'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_d4e64351-081d-4254-81df-abc132094daf',
+  keyword: 'key_4f3f1cb8-37a5-4d4b-9ba7-c7f9e3ebcdaa',
   answer: '¡Genial!, Su pedido se esta armando porvor espere a que lo llamen',
   options: {
     media: null,
@@ -333,11 +198,11 @@
     keyword: {},
     callback: false
   },
-  refSerialize: '34ea30096e9df0f7ca9ced7e8998172d'
+  refSerialize: '53f80c5bb06c4f165339121825b0ea39'
 }
 [QUEUE_SE_ENVIO]:  {
-  ref: 'ans_4d90d236-05a0-44d4-84bf-155d9b9b5c7e',
-  keyword: 'ans_a9e61fc6-d4e3-4692-a57c-6cc7937f1f65',
+  ref: 'ans_0f0e2e15-4a3c-4aa9-b877-1d629352ab87',
+  keyword: 'ans_d4e64351-081d-4254-81df-abc132094daf',
   answer: '__call_action__',
   options: {
     media: null,
@@ -351,5 +216,5 @@
     keyword: {},
     callback: true
   },
-  refSerialize: 'c4b563d7283564a9dc5f00cfcd3d798c'
+  refSerialize: 'dfc8467678ce33461f3d1669fdf455f0'
 }
