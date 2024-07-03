@@ -7,126 +7,97 @@ const MockAdapter = require('@bot-whatsapp/database/mock')
 
 /* SIMULACIÓN DE CONSUMO DE API */
 //Trae la parte de final de cada mensaje
-const finMensaje = [
-    '0 - Para volver al menú',
-    'Chau - Para terminar la conversación'
-];
-
-//Trae los mensajes dependiendo de los subflujos
-async function mensSub(flujo, mensaje) {
-    try {
-        var response = "";
-        switch (flujo) {
-
-            case 3:
-                switch (mensaje) {
-                    case 1:
-                        response = "Opción 1";
-                        break;
-                    case 2:
-                        response = "Opción 2";
-                    default:
-                        break;
-                }
-                break;
-
-            default:
-                response = "Ha ocurrido un error, por favor inténtelo más tarde";
-                break;
-        }
-        return response;
-    } catch (err) {
-        console.log("ERROR MENU:", err);
-        return err;
-    }
-}
-
+const finMensaje = "0 - Para volver al menú\nChau - Para terminar la conversación";
 //Trae los mensajes dependiendo de los flujos
 async function mens(flujo, mensaje) {
     try {
-        var response = "";
-        switch (flujo) {
-            case 0:
-                switch (mensaje) {
-                    case 1:
-                        response = "Hola! Te has comunicado con el bot de @deportiva.mza NUEVO";
-                        break;
-                    case 2:
-                        response = "🤖 Por favor, selecciona una opción: \n\n1- Ver catálogo 📝\n2- Nuestras redes 🌐\n3- Preguntas frecuentes ℹ️\n4- Hablar con un representante☎️\n\n_Para terminar la conversación escribe chau 😊_";
-                        break;
-                    default:
-                        break;
-                }
-
-                break;
-            case 1:
-                switch (mensaje) {
-                    case 1:
-                        response = "🙌 Acá está el catálogo que estamos constantemente actualizando:";
-                        break;
-                    case 2:
-                        response = "https://drive.google.com/file/d/1tsOfIyB4fhu0zd5bKvNTJ9aa5jDGLC7D/view?usp=drivesdk";
-                    default:
-                        break;
-                }
-                break;
-            case 2:
-                switch (mensaje) {
-                    case 1:
-                        response = "Nuestras redes";
-                        break;
-                    case 2:
-                        response = "Instagram: https://www.instagram.com/deportiva.mza?igsh=dW44ZGd0MXBtZ2Nz";
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 3:
-                switch (mensaje) {
-                    case 1:
-                        response = "*Preguntas frecuentes*\n1-De donde son las calzas?\n2-Qué talles abarcan S, M, L?";
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 4:
-                switch (mensaje) {
-                    case 1:
-                        response = "Aguarde un momento, en breve se comunicará uno de nuestros representantes...\nPara terminar la conversación con el representante escribe 'chau'";
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 100://Despedida
-                switch (mensaje) {
-                    case 1:
-                        response = "Gracias por comunicarte con @deportiva.mza\nRecuerda consultar nuestras redes para no perderte ninguna novedad!";
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                response = "Ha ocurrido un error, por favor inténtelo más tarde";
-                break;
-        }
-        return response;
+        const response = {
+            0: {
+                1: "Hola! Te has comunicado con el bot de @deportiva.mza NUEVO",
+                2: "🤖 Por favor, selecciona una opción: \n\n1- Ver catálogo 📝\n2- Nuestras redes 🌐\n3- Preguntas frecuentes ℹ️\n4- Hablar con un representante☎️\n\n_Para terminar la conversación escribe chau 😊_"
+            },
+            1: {
+                1: "🙌 Acá está el catálogo que estamos constantemente actualizando:",
+                2: "https://drive.google.com/file/d/1tsOfIyB4fhu0zd5bKvNTJ9aa5jDGLC7D/view?usp=drivesdk"
+            },
+            2: {
+                1: "Nuestras redes",
+                2: "Instagram: https://www.instagram.com/deportiva.mza?igsh=dW44ZGd0MXBtZ2Nz"
+            },
+            3: {
+                1: "*Preguntas frecuentes*\n1-De donde son las calzas?\n2-Qué talles abarcan S, M, L?"
+            },
+            4: {
+                1: "Aguarde un momento, en breve se comunicará uno de nuestros representantes...\nPara terminar la conversación con el representante escribe 'chau'"
+            },
+            5: {
+                1: "Opción 1",
+                2: "Opción 2"
+            },
+            100: {
+                1: "Gracias por comunicarte con @deportiva.mza\nRecuerda consultar nuestras redes para no perderte ninguna novedad!"
+            },
+        };
+        return response[parseInt(flujo)][parseInt(mensaje)];
     } catch (err) {
         console.log("ERROR MENU:", err);
         return err;
     }
 }
-/* FIN SIMULACIÓN DE CONSUMO DE API */
+/* ADIÓS Final del Programa*/
+async function finalFlow(flowDynamic, gotoFlow, endFlow, message, fallBack) {
+    //Trae el mensaje y lo pasa a minusculas
+    const msg = message.body.toString().toLowerCase();
+    if (msg === "chau" || msg === "adios") {
+        // Saludo final
+        const saludoFinal = await mens(100, 1);
+        await flowDynamic(saludoFinal);
+        return endFlow();
+    } else if (msg === "0" && gotoFlow !== null) {
+        return gotoFlow(flowMenu)
+    }
+    else if (fallBack !== null) {
+        await flowDynamic([
+            { body: 'Opción no válida, por favor seleccione una opción válida.' }
+        ]);
+        return fallBack()
+    }
+}
 
-
+//---------------- SubFlujo Hijo del 3 -------------------------
+/*
+const subFlow_1_de_flowTres = addKeyword('1')
+    .addAnswer('Opcion 1', { capture: true },
+        async (ctx, { flowDynamic, gotoFlow, endFlow, fallBack }) => {
+            try {
+                await finalFlow(flowDynamic, gotoFlow, endFlow, ctx, fallBack);
+            } catch (error) {
+                // Retorna el error por el body y por consola.
+                console.log("Error en el subFlow_1_de_flowTres", error);
+                await flowDynamic([{ body: "Ocurrio un error, por favor intentalo de nuevo" }]);
+                return fallBack();
+            }
+        }
+    )
+const subFlow_2_de_flowTres = addKeyword('2')
+    .addAnswer('Opcion 2', { capture: true },
+        async (ctx, { flowDynamic, gotoFlow, endFlow, fallBack }) => {
+            try {
+                await finalFlow(flowDynamic, gotoFlow, endFlow, ctx, fallBack);
+            } catch (error) {
+                // Retorna el error por el body y por consola.
+                console.log("Error en el subFlow_2_de_flowTres", error);
+                await flowDynamic([{ body: "Ocurrio un error, por favor intentalo de nuevo" }]);
+                return fallBack();
+            }
+        }
+    )
+*/
+//--------------------------------------------------------------------------
 //FLUJOS
-const flowCuatro = addKeyword(['4'])
-    .addAction({ capture: false },
-        async (ctx, { fallBack, flowDynamic }) => {
-            console.log("Entre 4");
+const flowCuatro = addKeyword('4')
+    .addAction(null,
+        async (_, { flowDynamic }) => {
             const response = await mens(4, 1);
             await flowDynamic(response)
         })
@@ -135,79 +106,71 @@ const flowCuatro = addKeyword(['4'])
         // Handler de la respuesta
         async (ctx, { fallBack, flowDynamic, gotoFlow, endFlow, state }) => {
             try {
-                //--------------ADIÓS--------------
-                //Trae el mensaje y lo pasa a minusculas
-                const mensaje = ctx.body.toString().toLowerCase();
-                if (mensaje == "chau" || mensaje == "adios") {
-                    // Saludo final
-                    const saludoFinal = await mens(100, 1);
-                    await flowDynamic(saludoFinal);
-                    return endFlow();
-                } else if (mensaje == "0") {
-                    return gotoFlow(flowMenu)
-                } else {
-                    return fallBack()
-                }
-
-
+                await finalFlow(flowDynamic, gotoFlow, endFlow, ctx, fallBack);
             } catch (error) {
-
                 // Retorna el error por el body y por consola.
                 console.log("Error en el FlowDos", error);
                 await flowDynamic([{ body: "Ocurrio un error, por favor intentalo de nuevo" }]);
                 return fallBack();
             }
-        },
-        // Flujos de submenú
-        []
+        }
     )
 
-const flowTres = addKeyword(['3'])
-    .addAction({ capture: false },
-        async (ctx, { fallBack, flowDynamic, gotoFlow, endFlow }) => {
+const flowTres = addKeyword('3')
+    .addAction(null,
+        async (_, { flowDynamic }) => {
+            console.log("Entre magicamente")
             const response = await mens(3, 1);
             await flowDynamic(response)
         })
     .addAnswer(
         finMensaje,
-        { capture: true },
+        { capture: true, delay: 700 },
         // Handler de la respuesta
         async (ctx, { fallBack, flowDynamic, gotoFlow, endFlow }) => {
             try {
 
-                //--------------ADIÓS--------------
-                //Trae el mensaje y lo pasa a minusculas
-                const mensaje = ctx.body.toString().toLowerCase();
-                if (mensaje == "chau" || mensaje == "adios") {
-                    // Saludo final
-                    const saludoFinal = await mens(100, 1);
-                    await flowDynamic(saludoFinal);
-                    return endFlow();
-                } else if (mensaje == "0") {
-                    return gotoFlow(flowMenu)
-                }
+                await finalFlow(flowDynamic, gotoFlow, endFlow, ctx, null);
 
+
+                const msg = parseInt(ctx.body.toLowerCase().trim());
+                // if (msg >= 1 && msg <= 2) {
+                //     return;
+                // }
                 //--------------SUBFLUJOS--------------
                 // Convertimos el mensaje en un número
-                const msg = parseInt(ctx.body.toLowerCase().trim());
                 console.log("Flujo menu", msg)
-                var response = ""
-                switch (msg) {
-                    case 1:
-                        response = await mensSub(3, 1);
-                        await flowDynamic(response);
-                        return gotoFlow(flowTres);
-                    case 2:
-                        response = await mensSub(3, 2);
-                        await flowDynamic(response);
-                        return gotoFlow(flowTres);
-                    default:
-                        // Si el número no es válido, mostramos un mensaje de error
-                        await flowDynamic([
-                            { body: 'Opción no válida, por favor seleccione una opción válida.' }
-                        ]);
-                        return fallBack();
+                /**
+                 Si cumple esta condicion se finalizaria el flujo 
+                 por ende seria mejor crear sub Flujo hijos para seguir
+                 el menu
+                 */
+                if (msg === 1 || msg === 2) {
+                    var response = await mens(5, msg);
+                    await flowDynamic(response);
+                    return;
                 }
+                // switch (msg) {
+                //     case 1:
+                //         response = await mens(5, 1);
+                //         await flowDynamic(response);
+                //         return gotoFlow(flowTres);
+                //     case 2:
+                //         response = await mens(5, 2);
+                //         await flowDynamic(response);
+                //         return gotoFlow(flowTres);
+                //     default:
+                //         // Si el número no es válido, mostramos un mensaje de error
+                //         await flowDynamic([
+                //             { body: 'Opción no válida, por favor seleccione una opción válida.' }
+                //         ]);
+                //         return fallBack();
+                // }
+                await flowDynamic([
+                    { body: 'Opción no válida, por favor seleccione una opción válida.' }
+                ]);
+                return fallBack();
+                // return gotoFlow(flowTres);
             } catch (error) {
 
                 // Retorna el error por el body y por consola.
@@ -216,18 +179,16 @@ const flowTres = addKeyword(['3'])
                 return fallBack();
             }
         },
-        // Flujos de submenú
-        []
     )
 
-const flowDos = addKeyword(['2'])
-    .addAction({ capture: false },
-        async (ctx, { fallBack, flowDynamic }) => {
+const flowDos = addKeyword('2')
+    .addAction(null,
+        async (_, { flowDynamic }) => {
             const response = await mens(2, 1);
             await flowDynamic(response)
         })
-    .addAction({ capture: false },
-        async (ctx, { fallBack, flowDynamic }) => {
+    .addAction(null,
+        async (_, { flowDynamic }) => {
             const response = await mens(2, 2);
             await flowDynamic(response)
         })
@@ -237,20 +198,7 @@ const flowDos = addKeyword(['2'])
         // Handler de la respuesta
         async (ctx, { fallBack, flowDynamic, gotoFlow, endFlow }) => {
             try {
-
-                //--------------ADIÓS--------------
-                //Trae el mensaje y lo pasa a minusculas
-                const mensaje = ctx.body.toString().toLowerCase();
-                if (mensaje == "chau" || mensaje == "adios") {
-                    // Saludo final
-                    const saludoFinal = await mens(100, 1);
-                    await flowDynamic(saludoFinal);
-                    return endFlow();
-                } else if (mensaje == "0") {
-                    return gotoFlow(flowMenu)
-                }
-
-
+                await finalFlow(flowDynamic, gotoFlow, endFlow, ctx, fallBack);
             } catch (error) {
 
                 // Retorna el error por el body y por consola.
@@ -263,13 +211,13 @@ const flowDos = addKeyword(['2'])
         []
     )
 
-const flowUno = addKeyword(['1'])
-    .addAction({ capture: false },
+const flowUno = addKeyword('1')
+    .addAction(null,
         async (_, { flowDynamic }) => {
             const response = await mens(1, 1);
             await flowDynamic(response)
         })
-    .addAction({ capture: false },
+    .addAction(null,
         async (_, { flowDynamic }) => {
             const response = await mens(1, 2);
             await flowDynamic(response)
@@ -280,20 +228,7 @@ const flowUno = addKeyword(['1'])
         // Handler de la respuesta
         async (ctx, { fallBack, flowDynamic, gotoFlow, endFlow }) => {
             try {
-
-                //--------------ADIÓS--------------
-                //Trae el mensaje y lo pasa a minusculas
-                const mensaje = ctx.body.toString().toLowerCase();
-                if (mensaje == "chau" || mensaje == "adios") {
-                    // Saludo final
-                    const saludoFinal = await mens(100, 1);
-                    await flowDynamic(saludoFinal);
-                    return endFlow();
-                } else if (mensaje == "0") {
-                    return gotoFlow(flowMenu)
-                }
-
-
+                await finalFlow(flowDynamic, gotoFlow, endFlow, ctx, fallBack);
             } catch (error) {
 
                 // Retorna el error por el body y por consola.
@@ -312,19 +247,11 @@ const flowMenu = addKeyword(EVENTS.ACTION)
             const response = await mens(0, 2);
             await flowDynamic(response)
         })
-    .addAnswer( '⚔️ 𝐌𝐄𝐍𝐔 ⚔️', { capture: true, delay: 700 },
+    .addAnswer('⚔️ 𝐌𝐄𝐍𝐔 ⚔️', { capture: true },
         // Handler de la respuesta
-        async (ctx, { fallBack, flowDynamic, endFlow }) => {
+        async (ctx, { fallBack, flowDynamic, endFlow, gotoFlow }) => {
             try {
-                //--------------ADIÓS--------------
-                //Trae el mensaje y lo pasa a minusculas
-                const adios = ctx.body.toString().toLowerCase();
-                if (adios == "chau" || adios == "adios") {
-                    // Saludo final
-                    const saludoFinal = await mens(100, 1);
-                    await flowDynamic(saludoFinal);
-                    return endFlow();
-                }
+                await finalFlow(flowDynamic, null, endFlow, ctx, null);
                 // Convertimos el mensaje en un número
                 const msg = parseInt(ctx.body.toLowerCase().trim());
                 console.log("Flujo menu", msg)
@@ -337,7 +264,7 @@ const flowMenu = addKeyword(EVENTS.ACTION)
                 await flowDynamic([
                     { body: 'Opción no válida, por favor seleccione una opción válida.' }
                 ]);
-                return fallBack();
+                return gotoFlow(flowMenu);
 
             } catch (error) {
 
@@ -350,44 +277,6 @@ const flowMenu = addKeyword(EVENTS.ACTION)
         // Flujos de submenú
         [flowUno, flowDos, flowTres, flowCuatro]
     )
-// .addAction({ capture: true, delay: 700 },
-//     // Handler de la respuesta
-//     async (ctx,{ fallBack, flowDynamic, endFlow }) => {
-//         try {
-//             //--------------ADIÓS--------------
-//             //Trae el mensaje y lo pasa a minusculas
-//             const adios = ctx.body.toString().toLowerCase();
-//             if (adios == "chau" || adios == "adios") {
-//                 // Saludo final
-//                 const saludoFinal = await mens(100, 1);
-//                 await flowDynamic(saludoFinal);
-//                 return endFlow();
-//             }
-//             // Convertimos el mensaje en un número
-//             const msg = parseInt(ctx.body.toLowerCase().trim());
-//             console.log("Flujo menu", msg)
-//             // Si el número es válido, lo pasamos al flujo correspondiente
-//             if (msg >= 1 && msg <= 4) {
-//                 return;
-//             }
-
-//             // Si el número no es válido, mostramos un mensaje de error
-//             await flowDynamic([
-//                 { body: 'Opción no válida, por favor seleccione una opción válida.' }
-//             ]);
-//             return fallBack();
-
-//         } catch (error) {
-
-//             // Retorna el error por el body y por consola.
-//             console.log("Error en el FlowMenú", error);
-//             await flowDynamic([{ body: "Ocurrio un error, por favor intentalo de nuevo" }]);
-//             return fallBack();
-//         }
-//     },
-//     // Flujos de submenú
-//    // [flowUno, flowDos, flowTres, flowCuatro]
-// )
 
 // Flow bienvenida
 const flowBienvenida = addKeyword(EVENTS.WELCOME)
@@ -402,7 +291,7 @@ const flowBienvenida = addKeyword(EVENTS.WELCOME)
                 // Mensaje de bienvenida por chat
                 await flowDynamic(response)
                 // Después de la presentación enviamos al flujo de saludo
-                return  gotoFlow(flowMenu)
+                return gotoFlow(flowMenu)
             } catch (error) {
                 console.log(error);
                 await flowDynamic([{ body: "Ocurrió un error, por favor inténtalo de nuevo" }]);
