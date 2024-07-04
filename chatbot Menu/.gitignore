@@ -1,2 +1,7 @@
 node_modules/
 bot_sessions/
+/Test/bot_session
+/Test/bot.qr.png
+/Test/baileys.log
+/Test/queue.class.log
+/Test/core.class.log

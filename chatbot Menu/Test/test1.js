@@ -134,9 +134,9 @@ const flowTres = addKeyword('3')
 
 
                 const msg = parseInt(ctx.body.toLowerCase().trim());
-                // if (msg >= 1 && msg <= 2) {
-                //     return;
-                // }
+                if (msg >= 1 && msg <= 2) {
+                    return;
+                }
                 //--------------SUBFLUJOS--------------
                 // Convertimos el mensaje en un número
                 console.log("Flujo menu", msg)
@@ -150,22 +150,6 @@ const flowTres = addKeyword('3')
                     await flowDynamic(response);
                     return;
                 }
-                // switch (msg) {
-                //     case 1:
-                //         response = await mens(5, 1);
-                //         await flowDynamic(response);
-                //         return gotoFlow(flowTres);
-                //     case 2:
-                //         response = await mens(5, 2);
-                //         await flowDynamic(response);
-                //         return gotoFlow(flowTres);
-                //     default:
-                //         // Si el número no es válido, mostramos un mensaje de error
-                //         await flowDynamic([
-                //             { body: 'Opción no válida, por favor seleccione una opción válida.' }
-                //         ]);
-                //         return fallBack();
-                // }
                 await flowDynamic([
                     { body: 'Opción no válida, por favor seleccione una opción válida.' }
                 ]);
