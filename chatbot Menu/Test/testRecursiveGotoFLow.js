@@ -43,7 +43,7 @@ const test1_goto = addKeyword(EVENTS.ACTION)
     })
     .addAction(async (_, { gotoFlow }) => {
         console.log('Antes de Entrar')
-        return gotoFlow(flowHijo_1);
+        return gotoFlow(test2_goto);
     })
 // -------------------------------------------------------------------------------------
 const test2_goto = addKeyword(EVENTS.ACTION)
@@ -69,6 +69,7 @@ const test2_goto = addKeyword(EVENTS.ACTION)
 // -------------------------------------------------------------------------------------
 
 const test_flow = [flowBienvenida, test1_goto, test2_goto];
+console.log(JSON.stringify(test_flow, null, 2))
 const main = async () => {
     const adapterDB = new MockAdapter()
     const adapterFlow = createFlow(test_flow)

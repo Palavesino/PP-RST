@@ -1,0 +1,51 @@
+{
+  "name": "Main Flow",
+  "description": "Este es el flujo principal",
+  "flows": [
+    {
+      "name": "Child Flow 1",
+      "description": "Este es el primer hijo del flujo principal",
+      "flows": [
+        {
+          "name": "Child Flow 1.1",
+          "description": "Este es el primer hijo de Child Flow 1",
+          "flows": [
+            {
+              "name": "Child Flow 1.1.1",
+              "description": "Este es el primer hijo de Child Flow 1.1",
+              "flows": []
+            }
+          ]
+        },
+        {
+          "name": "Child Flow 1.2",
+          "description": "Este es el segundo hijo de Child Flow 1",
+          "flows": [
+            {
+              "name": "Child Flow 1.2.1",
+              "description": "Este es el primer hijo de Child Flow 1.2",
+              "flows": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Child Flow 2",
+      "description": "Este es el segundo hijo del flujo principal",
+      "flows": [
+        {
+          "name": "Child Flow 2.1",
+          "description": "Este es el primer hijo de Child Flow 2",
+          "flows": []
+        },
+        {
+          "name": "Child Flow 2.2",
+          "description": "Este es el segundo hijo de Child Flow 2",
+          "flows": []
+        }
+      ]
+    }
+  ]
+}
+
