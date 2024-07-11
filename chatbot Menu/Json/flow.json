@@ -1,29 +1,49 @@
 {
+  "id": 1,
   "name": "Main Flow",
   "description": "Este es el flujo principal",
+  "parent_id": null,
   "flows": [
     {
+      "id": 2,
       "name": "Child Flow 1",
       "description": "Este es el primer hijo del flujo principal",
+      "parent_id": 1,
       "flows": [
         {
+          "id": 4,
           "name": "Child Flow 1.1",
           "description": "Este es el primer hijo de Child Flow 1",
+          "parent_id": 2,
           "flows": [
             {
+              "id": 6,
               "name": "Child Flow 1.1.1",
               "description": "Este es el primer hijo de Child Flow 1.1",
-              "flows": []
+              "parent_id": 4,
+              "flows": [
+                {
+                  "id": 10,
+                  "name": "Child Flow 1.1.1.1",
+                  "description": "Este es el primer hijo de Child Flow 1.1.1",
+                  "parent_id": 6,
+                  "flows": []
+                }
+              ]
             }
           ]
         },
         {
+          "id": 5,
           "name": "Child Flow 1.2",
           "description": "Este es el segundo hijo de Child Flow 1",
+          "parent_id": 2,
           "flows": [
             {
+              "id": 7,
               "name": "Child Flow 1.2.1",
               "description": "Este es el primer hijo de Child Flow 1.2",
+              "parent_id": 5,
               "flows": []
             }
           ]
@@ -31,21 +51,26 @@
       ]
     },
     {
+      "id": 3,
       "name": "Child Flow 2",
       "description": "Este es el segundo hijo del flujo principal",
+      "parent_id": 1,
       "flows": [
         {
+          "id": 8,
           "name": "Child Flow 2.1",
           "description": "Este es el primer hijo de Child Flow 2",
+          "parent_id": 3,
           "flows": []
         },
         {
+          "id": 9,
           "name": "Child Flow 2.2",
           "description": "Este es el segundo hijo de Child Flow 2",
+          "parent_id": 3,
           "flows": []
         }
       ]
     }
   ]
 }
-

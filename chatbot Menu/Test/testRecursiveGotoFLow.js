@@ -2,7 +2,7 @@
 /*  ------------ Datos a Tener En Cuenta ---------------------------
 * El Metodo gotoFlow no funciona correctamente si el flujo que lo es usando no esta en createFlow 
 caso contrario el progrma no reconoce al flujo mismo como flujo de chatBot.
-* addAction como bine dice el metodo ejecuta acciones a diferencia de addAnswer este no posee el parametro nested?: any[],
+* addAction como bien dice el metodo ejecuta acciones a diferencia de addAnswer este no posee el parametro nested?: any[],
   que vendria a hacer los flujos hijos que el usuario se redirige mediante su respuesta.
 */
 const { createBot, createProvider, createFlow, addKeyword, EVENTS } = require('@bot-whatsapp/bot')

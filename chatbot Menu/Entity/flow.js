@@ -1,8 +1,10 @@
 class Flow {
-    constructor(name = '', description = '', flows = []) {
+    constructor(id, name, description, parent_id, flows) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.flows = flows.map(flow => Flow.fromJSON(flow));
+        this.parent_id = parent_id;
+        this.flows = flows || [];
     }
 
     addFlow(flow) {
@@ -20,9 +22,14 @@ class Flow {
         }
         return count;
     }
-
     static fromJSON(json) {
-        return new Flow(json.name, json.description, json.flows);
+        return new Flow(
+            json.id,
+            json.name,
+            json.description,
+            json.parent_id,
+            json.flows ? json.flows.map(Flow.fromJSON) : []
+        );
     }
 }
 
