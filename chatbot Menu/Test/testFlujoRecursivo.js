@@ -16,6 +16,8 @@ const { getFlows, connection } = require('./testBD'); // Conexion a BD y metodo 
 //const rootFlow = Flow.fromJSON(flowsData);
 
 let flowWelcome = addKeyword(EVENTS.WELCOME);
+let flowList = [];
+let contador = 0;
 
 // Define un flujo final que se ejecuta cuando no hay más subflujos
 const flujoFin = addKeyword(EVENTS.ACTION)
@@ -27,6 +29,7 @@ const flujoFin = addKeyword(EVENTS.ACTION)
 
 const subFlujos = addKeyword(EVENTS.ACTION)
     .addAction(async (_, { flowDynamic, state, gotoFlow }) => {
+        console.log("contador = " +contador)
         flowPrincipal = state.get('flowPrincipal');
         if (flowPrincipal.flows.length !== 0) {
             let subFlowsMessage = `${flowPrincipal.name}\n\n`;
@@ -34,7 +37,12 @@ const subFlujos = addKeyword(EVENTS.ACTION)
             flowPrincipal.flows.forEach((subFlow, subIndex) => {
                 subFlowsMessage += `${subIndex + 1}) ${subFlow.name}\n`;
             });
-            subFlowsMessage += `\n\n0) Volver al Menu`
+            // subFlowsMessage += `\n\n0) Volver al Menu`
+            if (contador === 0) {
+                subFlowsMessage += `\n\n0) Volver al Menu`
+            } else {
+                subFlowsMessage += `\n\n0) Volver al Anterior`
+            }
             return await flowDynamic(subFlowsMessage);
         }
         await flowDynamic(flowPrincipal.name);
@@ -45,9 +53,16 @@ const subFlujos = addKeyword(EVENTS.ACTION)
         // Captura la selección del usuario y navega al subflujo correspondiente
         const index = parseInt(ctx.body.trim()) - 1;
         if (!isNaN(index) && index >= 0 && index < flowPrincipal.flows.length) {
-            await state.update({ flowPrincipal: flowPrincipal.flows[index], anterior: flowPrincipal })
+            flowList[contador] = flowPrincipal;
+            contador++;
+            await state.update({ flowPrincipal: flowPrincipal.flows[index] })
             await gotoFlow(subFlujos);
-        } else if (index === -1) {
+        } else if (index === -1 && contador !== 0) {
+            const flowAnterior = flowList[(contador - 1)];
+            await state.update({ flowPrincipal: flowAnterior })
+            contador--;
+            await gotoFlow(subFlujos);
+        } else if (index === -1 && contador === 0) {
             //Vuelve al Menu
             await gotoFlow(flowWelcome);
         }
