@@ -7,143 +7,135 @@ const { createBot, createProvider, createFlow, addKeyword, EVENTS } = require('@
 const QRPortalWeb = require('@bot-whatsapp/portal');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys');
 const MockAdapter = require('@bot-whatsapp/database/mock');
-const { getFlows, connection } = require('./testBD'); // Conexion a BD y metodo para traer array de Flujos
+const optionMesage = require('../Enum/OptionMessage');
 
-
-//const Flow = require('../Entity/flow');
 const flowsData = require('../Json/flow2.json');
-// Convierte el JSON de flujos en una estructura de objetos
-//const rootFlow = Flow.fromJSON(flowsData);
-//const rootFlow = flowsData
 
-let flowWelcome = addKeyword(EVENTS.WELCOME);
-let flowList = [];
+
+
+let messageList = [];
 let contador = 0;
-let contador2 = 0;
-let select = false;
+let flowCounter = 0;
+let childCounter = 0;
 
-// Define un flujo final que se ejecuta cuando no hay más subflujos
+// Función para actualizar los contadores de flujo y mensaje
+function updateCounters() {
+    if ((flowsData[flowCounter].messages.length - 1) === childCounter) {
+        flowCounter++;
+        childCounter = 0;
+    } else {
+        childCounter++;
+    }
+}
+
 const flujoFin = addKeyword(EVENTS.ACTION)
-    .addAction(async (_, { flowDynamic }) => {
-        await flowDynamic([{ body: `FIN DE FlUJOS` }]);
-        return;
+    .addAction(async (_, { endFlow, state }) => {
+        contador = 0
+        flowCounter = 0
+        childCounter = 0
+        messageList = []
+        await state.update({ showMessage: false })
+        return await endFlow();
     });
-
 
 const subFlujos = addKeyword(EVENTS.ACTION)
     .addAction(async (_, { flowDynamic, state, gotoFlow }) => {
-        console.log("contador = " + contador)
-        flowPrincipal = state.get('flowPrincipal');
-        if (flowPrincipal.childMessages.length !== 0) {
-            let subFlowsMessage = `${flowPrincipal.name}\n\n`;
-            // Construye el mensaje con los nombres de los subflujos
-            flowPrincipal.flows.forEach((subFlow, subIndex) => {
-                subFlowsMessage += `${subIndex + 1}) ${subFlow.name}\n`;
-            });
-            // subFlowsMessage += `\n\n0) Volver al Menu`
-            if (contador === 0) {
-                subFlowsMessage += `\n\n0) Volver al Menu`
-            } else {
-                subFlowsMessage += `\n\n0) Volver al Anterior`
+        let message = state.get('message');
+        if (message !== null) {
+            let body = message.showName
+                ? message.body.replace(/\b(name|nombre)\b/gi, state.get('name'))
+                : message.body;
+            await flowDynamic(body);
+            if (message.option !== optionMesage.READ) {
+                const showMessage = message.option !== optionMesage.CAPTURE
+                    ? state.get('showMessage')
+                    : false;
+                //console.log(`oprion = ${message.option} showMessage = ${showMessage}  contador = ${contador}`)
+                const subFlowsMessage = showMessage
+                    ? (contador === 0 ? `0) Volver al Menú` : `0) Volver al Anterior`)
+                    : null;
+
+                if (subFlowsMessage) {
+                    await flowDynamic(subFlowsMessage);
+                }
+
+                return;
             }
-            return await flowDynamic(subFlowsMessage);
         }
-        await flowDynamic(flowPrincipal.name);
-        return await gotoFlow(flujoFin);
+
+        if (flowCounter === (flowsData.length - 1)) {
+            return gotoFlow(flujoFin);
+        }
+        updateCounters()
+        return await gotoFlow(flowWelcome);
+
     })
-    .addAction({ capture: true }, async (ctx, { fallBack, gotoFlow, state }) => {
-        flowPrincipal = state.get('flowPrincipal');
+    .addAction({ capture: true }, async (ctx, { flowDynamic, fallBack, gotoFlow, state }) => {
+        let message = state.get('message');
+
+        if (ctx.body.toString().toLowerCase() === 'chau' || ctx.body.toString().toLowerCase() === 'adios') {
+            await flowDynamic("¡Gracias por comunicarte con @DanielBot! 😊")
+            return gotoFlow(flujoFin);
+        }
+        if (message.isName) {
+            await state.update({
+                name: ctx.body.toString()
+            });
+        } else if (message.isNumber) {
+            if (isNaN(ctx.body.trim())) {
+                return await fallBack('Por favor, selecciona una opción válida.');
+            }
+        }
         // Captura la selección del usuario y navega al subflujo correspondiente
+        if (message.option !== optionMesage.MENU || (message.childMessages.length === 0 && parseInt(ctx.body.trim()) !== 0)) {
+            await state.update({ message: null, showMessage: false })
+            messageList = []
+            contador = 0
+            return await gotoFlow(subFlujos);
+        }
         const index = parseInt(ctx.body.trim()) - 1;
-        if (!isNaN(index) && index >= 0 && index < flowPrincipal.flows.length) {
-            flowList[contador] = flowPrincipal;
+        if (!isNaN(index) && index >= 0 && index < message.childMessages.length) {
+            messageList[contador] = message;
             contador++;
-            await state.update({ flowPrincipal: flowPrincipal.flows[index] })
+            await state.update({
+                message: message.childMessages[index],
+                showMessage: true
+            });
             await gotoFlow(subFlujos);
         } else if (index === -1 && contador !== 0) {
-            const flowAnterior = flowList[(contador - 1)];
-            await state.update({ flowPrincipal: flowAnterior })
+            const previousMessage = messageList[(contador - 1)];
+            await state.update({ message: previousMessage })
             contador--;
+            if (contador === 0) {
+                await state.update({ showMessage: false })
+            }
             await gotoFlow(subFlujos);
-        } else if (index === -1 && contador === 0) {
-            //Vuelve al Menu
-            await gotoFlow(flowWelcome);
-        }
-        else {
+        } else {
             // Si la selección no es válida, muestra un mensaje de error
-            await fallBack('Por favor, selecciona una opción válida.');
+            return await fallBack('Por favor, selecciona una opción válida.');
         }
+
     });
 ;
 
-// Función recursiva que genera flujos dinámicamente
-const generateMenu = addKeyword(EVENTS.ACTION)
-    .addAction(async (_, { flowDynamic, state, gotoFlow }) => {
-        const messagesList = await state.get('messagesList') || [];
 
-        let subFlowsMessage = '';
-
-        messagesList.forEach((subMessage) => {
-            subFlowsMessage += `${subMessage.body}\n`;
+const flowWelcome = addKeyword(EVENTS.WELCOME)
+    .addAction(async (_, { gotoFlow, state }) => {
+        await state.update({
+            message: flowsData[flowCounter].messages.length !== 0
+                ? flowsData[flowCounter].messages[childCounter]
+                : null
         });
+        return await gotoFlow(subFlujos)
 
-        await flowDynamic(subFlowsMessage.trim());
-        return await gotoFlow(generateFlow)
     })
-// .addAction({ capture: true }, async (ctx, { fallBack, state, gotoFlow }) => {
-//     // Captura la selección del usuario y navega al subflujo correspondiente
-//     const index = parseInt(ctx.body.trim()) - 1;
-//     if (!isNaN(index) && index >= 0 && index < flowList.length) {
-//         await state.update({ flowPrincipal: flowList[index] })
-//         return await gotoFlow(subFlujos);
-//     } else {
-//         // Si la selección no es válida, muestra un mensaje de error
-//         await fallBack('Por favor, selecciona una opción válida.');
-//     }
-// })
 
-const generateFlow = async (flowList) => {
-    flowWelcome = flowWelcome
-        .addAction(async (_, { flowDynamic, gotoFlow }) => {
-            console.log(`contador = ${contador2}\n select = ${select}`)
-            if (flowList.length === contador2) {
-                return await flowDynamic('Fin de todos los Flujos');
-            }
-            if (contador2 === 1) {
-                select = true
-            }
-            const subFlow = flowList[contador2]
-            let subFlowsMessage = `Flujo: ${subFlow.name}\n`;
-            if (subFlow.messages.length > 0) {
-                subFlow.messages.forEach((subMessage) => {
-                    subFlowsMessage += `${subMessage.body}\n`;
-                });
-            }
-            await flowDynamic(subFlowsMessage);
-            contador2++;
-            if (select) {
-                return
-            }
-            return await gotoFlow(flowWelcome);
-        })
-        .addAction({ capture: true }, async (ctx, { fallBack, state, gotoFlow }) => {
-            // Captura la selección del usuario y navega al subflujo correspondiente
-            const index = parseInt(ctx.body.trim()) - 1;
-            if (!isNaN(index) && index >= 0 && index < flowList[contador2].messages.length) {
-                await state.update({ flowPrincipal: flowList[contador2].messages[index] })
-                return await gotoFlow(subFlujos);
-            } else {
-                // Si la selección no es válida, muestra un mensaje de error
-                await fallBack('Por favor, selecciona una opción válida.');
-            }
-        })
-};
+
 // Función principal para iniciar el bot
 const main = async () => {
     try {
-        await generateFlow(flowsData); // Utilizando Json
         const adapterDB = new MockAdapter();
-        const adapterFlow = createFlow([subFlujos, flowWelcome, flujoFin, generateMenu]);
+        const adapterFlow = createFlow([subFlujos, flowWelcome, flujoFin]);
         const adapterProvider = createProvider(BaileysProvider);
 
         // Crea el bot con los adaptadores y flujos definidos
@@ -158,8 +150,6 @@ const main = async () => {
 
     } catch (err) {
         console.error('Error obteniendo los flujos:', err);
-    } finally {
-        connection.end();
     }
 
 };

@@ -1,0 +1,151 @@
+[
+    {
+      "id": 1,
+      "deletedAt": null,
+      "createdAt": "2024-10-16T00:30:24.404Z",
+      "name": "flowUno",
+      "description": "flujo donde se ponen los mensajes iniciales, saludo, bienvenida, etc.",
+      "messages": [
+        {
+          "option": "MENU",
+          "typeMessage": null,
+          "showName": null,
+          "isDeleted": false,
+          "id": 1,
+          "deletedAt": null,
+          "createdAt": "2024-10-22T04:49:18.220Z",
+          "numOrder": 1,
+          "name": null,
+          "body": "Menu 1",
+          "childMessage": [
+            {
+              "option": "MENU",
+              "typeMessage": null,
+              "showName": null,
+              "isDeleted": false,
+              "id": 2,
+              "deletedAt": null,
+              "createdAt": "2024-10-22T04:49:18.220Z",
+              "numOrder": 1,
+              "name": null,
+              "body": "Menu 1.1",
+              "childMessage": [
+                {
+                  "option": "MENU",
+                  "typeMessage": null,
+                  "showName": null,
+                  "isDeleted": false,
+                  "id": 3,
+                  "deletedAt": null,
+                  "createdAt": "2024-10-22T04:49:18.220Z",
+                  "numOrder": 1,
+                  "name": null,
+                  "body": "Menu 1.1.1",
+                  "childMessage": [
+                    {
+                      "option": "CAPTURE",
+                      "typeMessage": null,
+                      "showName": null,
+                      "isDeleted": false,
+                      "id": 4,
+                      "deletedAt": null,
+                      "createdAt": "2024-10-22T04:49:18.220Z",
+                      "numOrder": 1,
+                      "name": null,
+                      "body": "Capture 1.1.1",
+                      "childMessage": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "option": "MENU",
+              "typeMessage": null,
+              "showName": null,
+              "isDeleted": false,
+              "id": 5,
+              "deletedAt": null,
+              "createdAt": "2024-10-22T04:49:18.220Z",
+              "numOrder": 2,
+              "name": null,
+              "body": "Menu 1.2",
+              "childMessage": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "deletedAt": null,
+      "createdAt": "2024-10-16T00:30:24.404Z",
+      "name": "flowDos",
+      "description": "flujo con distintos tipos de mensajes",
+      "messages": [
+        {
+          "option": "MENU",
+          "typeMessage": null,
+          "showName": null,
+          "isDeleted": false,
+          "id": 6,
+          "deletedAt": null,
+          "createdAt": "2024-10-22T04:49:18.220Z",
+          "numOrder": 1,
+          "name": null,
+          "body": "Menu 1",
+          "childMessage": [
+            {
+              "option": "MENU",
+              "typeMessage": null,
+              "showName": null,
+              "isDeleted": false,
+              "id": 7,
+              "deletedAt": null,
+              "createdAt": "2024-10-22T04:49:18.220Z",
+              "numOrder": 1,
+              "name": null,
+              "body": "Menu 1.1",
+              "childMessage": []
+            },
+            {
+              "option": "CAPTURE",
+              "typeMessage": null,
+              "showName": null,
+              "isDeleted": false,
+              "id": 8,
+              "deletedAt": null,
+              "createdAt": "2024-10-22T04:49:18.220Z",
+              "numOrder": 2,
+              "name": null,
+              "body": "Capture 1.2",
+              "childMessage": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "deletedAt": null,
+      "createdAt": "2024-10-16T00:30:24.404Z",
+      "name": "flowTres",
+      "description": "flujo con más complejidad",
+      "messages": [
+        {
+          "option": "READ",
+          "typeMessage": "DEFAULT",
+          "showName": true,
+          "isDeleted": false,
+          "id": 9,
+          "deletedAt": null,
+          "createdAt": "2024-10-22T04:49:18.220Z",
+          "numOrder": 1,
+          "name": null,
+          "body": "Menu 1",
+          "childMessage": []
+        }
+      ]
+    }
+  ]
+  

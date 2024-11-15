@@ -7,11 +7,15 @@
         "description": "flujo donde se ponen los mensajes iniciales, saludo, bienvenida, etc.",
         "messages": [
             {
+                "isNumber": null,
                 "id": "c3c932d1-d803-4373-953a-b52bd720e658",
                 "deletedAt": null,
                 "createdAt": "2024-10-22T04:48:00.061Z",
                 "numOrder": 0,
+                "isName": null,
+                "showName": null,
                 "body": "Hola! Te has comunicado con el bot de @DanielBot",
+                "option": "READ",
                 "childMessages": []
             }
         ]
@@ -24,43 +28,38 @@
         "description": "flujo donde pone el tema de conversacion como Eje: menu, objetivo, pedido, factura,etc.",
         "messages": [
             {
-                "id": "96f28897-9153-4093-9858-c575fe726213",
-                "deletedAt": null,
-                "createdAt": "2024-10-25T18:02:06.097Z",
-                "numOrder": 3,
-                "body": "test child ",
-                "childMessages": []
-            },
-            {
+                "isNumber": null,
                 "id": "bf898e01-6f97-4575-87c9-ee6c27a60c64",
                 "deletedAt": null,
                 "createdAt": "2024-10-22T04:49:18.220Z",
                 "numOrder": 1,
+                "isName": null,
+                "showName": null,
                 "body": "🤖 Por favor, selecciona una opción: \n\n1- Abogacía 📝\n\n2- Escribanía 📃\n\nPara terminar la conversación escribe chau 😊",
+                "option": "MENU",
                 "childMessages": [
                     {
-                        "id": "780a12fd-d70a-4e8d-8c79-592533bc43ba",
-                        "deletedAt": null,
-                        "createdAt": "2024-10-22T04:54:02.768Z",
-                        "numOrder": 2,
-                        "body": "🤖 Por favor, selecciona una opción: \n\n1- Escritura de compra venta 📝\n2- Poderes 🏛\n3- Actas 📋\n4- Certificado de firma y documentación 🗂\n5- Confección de contratos de locación 📄\n6- Actas de notificación y constatación 🤝",
-                        "childMessages": [
-                            {
-                                "id": "5e203427-44b0-49e6-ab2b-dd1463e584d4",
-                                "deletedAt": null,
-                                "createdAt": "2024-10-22T22:16:50.132Z",
-                                "numOrder": 2,
-                                "body": "ddddsad",
-                                "childMessages": []
-                            }
-                        ]
-                    },
-                    {
+                        "isNumber": null,
                         "id": "afd2bb9a-2b98-4576-ba42-e17077abf29b",
                         "deletedAt": null,
                         "createdAt": "2024-10-22T04:51:06.979Z",
                         "numOrder": 0,
+                        "isName": null,
+                        "showName": null,
                         "body": "🤖 Por favor, selecciona una opción: \n\n1- Laboral 👷🏾‍♂\n2- Penal 🧑🏻‍⚖\n3- Derecho de familia 👨‍👩‍👧",
+                        "option": "MENU",
+                        "childMessages": []
+                    },
+                    {
+                        "isNumber": null,
+                        "id": "780a12fd-d70a-4e8d-8c79-592533bc43ba",
+                        "deletedAt": null,
+                        "createdAt": "2024-10-22T04:54:02.768Z",
+                        "numOrder": 2,
+                        "isName": null,
+                        "showName": null,
+                        "body": "🤖 Por favor, selecciona una opción: \n\n1- Escritura de compra venta 📝\n2- Poderes 🏛\n3- Actas 📋\n4- Certificado de firma y documentación 🗂\n5- Confección de contratos de locación 📄\n6- Actas de notificación y constatación 🤝",
+                        "option": "MENU",
                         "childMessages": []
                     }
                 ]
@@ -75,19 +74,66 @@
         "description": "flow para colocar mas temas de conversacion ",
         "messages": [
             {
-                "id": "7343a69f-f11f-47ce-a817-697c7c7b7a73",
-                "deletedAt": null,
-                "createdAt": "2024-10-22T04:54:54.301Z",
-                "numOrder": 1,
-                "body": "Datos de Usuario 👤\n\nIngrese nombre y apellido",
-                "childMessages": []
-            },
-            {
+                "isNumber": true,
                 "id": "522d4c1d-7047-40e0-98aa-be3f192ebabf",
                 "deletedAt": null,
                 "createdAt": "2024-10-22T04:55:30.785Z",
                 "numOrder": 0,
+                "isName": null,
+                "showName": null,
                 "body": "Disponibilidad Horaria 🕒\n\nSelecciona una opción:\n\n1- 8:00 a 12:00\n2- 12:00 a 16:00\n3- 16:00 a 20:00",
+                "option": "MENU",
+                "childMessages": [
+                    {
+                        "isNumber": null,
+                        "id": 1,
+                        "deletedAt": null,
+                        "createdAt": "2024-10-22T04:51:06.979Z",
+                        "numOrder": 0,
+                        "isName": null,
+                        "showName": null,
+                        "body": "TEST MENU 1.1",
+                        "option": "MENU",
+                        "childMessages": [
+                            {
+                                "isNumber": null,
+                                "id": 2,
+                                "deletedAt": null,
+                                "createdAt": "2024-10-22T04:51:06.979Z",
+                                "numOrder": 0,
+                                "isName": null,
+                                "showName": null,
+                                "body": "TEST MENU 1.1.1",
+                                "option": "MENU",
+                                "childMessages": [
+                                    {
+                                        "isNumber": null,
+                                        "id": 3,
+                                        "deletedAt": null,
+                                        "createdAt": "2024-10-22T04:51:06.979Z",
+                                        "numOrder": 0,
+                                        "isName": null,
+                                        "showName": null,
+                                        "body": "TEST MENU 1.1.1.1",
+                                        "option": "MENU",
+                                        "childMessages": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "isNumber": null,
+                "id": "7343a69f-f11f-47ce-a817-697c7c7b7a73",
+                "deletedAt": null,
+                "createdAt": "2024-10-22T04:54:54.301Z",
+                "numOrder": 1,
+                "isName": true,
+                "showName": null,
+                "body": "Datos de Usuario 👤\n\nIngrese nombre y apellido",
+                "option": "CAPTURE",
                 "childMessages": []
             }
         ]
@@ -100,11 +146,15 @@
         "description": "flujo donde se colocal final de mensaje Eje: Despedida, Redes, contactos, etc. ",
         "messages": [
             {
+                "isNumber": null,
                 "id": "57e1673a-23d1-417b-82e8-048cfa796383",
                 "deletedAt": null,
                 "createdAt": "2024-10-22T04:57:25.391Z",
                 "numOrder": 1,
-                "body": "Gracias por comunicarte con @DanielBot\nRecuerda consultar nuestras redes para no perderte ninguna novedad!",
+                "isName": null,
+                "showName": true,
+                "body": "Gracias por comunicarte nombre con @DanielBot\nRecuerda consultar nuestras redes para no perderte ninguna novedad!",
+                "option": "READ",
                 "childMessages": []
             }
         ]

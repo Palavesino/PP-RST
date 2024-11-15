@@ -9,7 +9,6 @@ const BaileysProvider = require('@bot-whatsapp/provider/baileys');
 const MockAdapter = require('@bot-whatsapp/database/mock');
 const { getFlows, connection } = require('./testBD'); // Conexion a BD y metodo para traer array de Flujos
 
-
 //const Flow = require('../Entity/flow');
 //const flowsData = require('../Json/flow.json');
 // Convierte el JSON de flujos en una estructura de objetos
@@ -29,7 +28,7 @@ const flujoFin = addKeyword(EVENTS.ACTION)
 
 const subFlujos = addKeyword(EVENTS.ACTION)
     .addAction(async (_, { flowDynamic, state, gotoFlow }) => {
-        console.log("contador = " +contador)
+        console.log("contador = " + contador)
         flowPrincipal = state.get('flowPrincipal');
         if (flowPrincipal.flows.length !== 0) {
             let subFlowsMessage = `${flowPrincipal.name}\n\n`;
