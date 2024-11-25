@@ -5,3 +5,5 @@ bot_sessions/
 /Test/baileys.log
 /Test/queue.class.log
 /Test/core.class.log
+.env
+.env.*
